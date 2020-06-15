@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nekic-dev 
+  annotations:
+    openshift.io/node-selector: ""
+spec:
+  finalizers:
+  - kubernetes

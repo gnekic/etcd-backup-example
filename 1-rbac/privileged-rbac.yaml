@@ -1,0 +1,33 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    config.example.com/name: simple-bootstrap
+    config.example.com/component: rbac
+  name: allow-privileged-scc
+rules:
+  - apiGroups:
+      - security.openshift.io
+    resources:
+      - securitycontextconstraints
+    verbs:
+      - use
+    resourceNames:
+      - privileged
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: privileged-scc
+  labels:
+    config.example.com/name: simple-bootstrap
+    config.example.com/component: rbac
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: allow-privileged-scc
+subjects:
+  - kind: ServiceAccount
+    name: etcd-backup
+    namespace: nekic-dev
