@@ -3,6 +3,9 @@ kind: ConfigMap
 metadata:
   name: etcd-backup
   namespace: nekic-dev
+  labels:
+    config.example.com/name: etcd-backup
+    config.example.com/component: configmap
 data:
   etcd-backup.sh: |
     #!/bin/bash

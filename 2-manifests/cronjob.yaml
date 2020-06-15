@@ -3,6 +3,8 @@ kind: CronJob
 metadata:
   labels:
     purpose: etcd-backup
+    config.example.com/name: etcd-backup
+    config.example.com/component: cronjob
   name: cronjob-etcd-backup
   namespace: nekic-dev 
 spec:
@@ -17,7 +19,7 @@ spec:
           containers:
           - command:
             - /usr/local/bin/etcd-backup.sh
-            image: quay.io/coreos/etcd:v3.3.22
+            image: quay.io/openshift/origin-etcd:v4.3
             imagePullPolicy: IfNotPresent
             name: etcd-backup
             resources:
@@ -82,7 +84,7 @@ spec:
               claimName: etcd-backup
           - name: etcd-backup-scripts
             configMap:
-              name: "{{ etcd_backup_configmap }}"
+              name: etcd-backup 
               defaultMode: 0755
   schedule: '*/5 * * * *'
   startingDeadlineSeconds: 200

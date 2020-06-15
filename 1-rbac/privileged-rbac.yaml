@@ -3,7 +3,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    config.example.com/name: simple-bootstrap
+    config.example.com/name: etcd-backup 
     config.example.com/component: rbac
   name: allow-privileged-scc
 rules:
@@ -21,7 +21,7 @@ kind: ClusterRoleBinding
 metadata:
   name: privileged-scc
   labels:
-    config.example.com/name: simple-bootstrap
+    config.example.com/name: etcd-backup
     config.example.com/component: rbac
 roleRef:
   apiGroup: rbac.authorization.k8s.io
