@@ -19,7 +19,7 @@ spec:
           containers:
           - command:
             - /usr/local/bin/etcd-backup.sh
-            image: quay.io/openshift/origin-etcd:v4.3
+            image: quay.io/openshift/origin-etcd:4.3.0
             imagePullPolicy: IfNotPresent
             name: etcd-backup
             resources:
