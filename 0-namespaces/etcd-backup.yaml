@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: nekic-dev 
+  name: etcd-backup 
   labels: 
     config.example.com/name: etcd-backup
     config.example.com/component: namespaces

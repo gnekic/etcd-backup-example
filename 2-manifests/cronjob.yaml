@@ -6,7 +6,7 @@ metadata:
     config.example.com/name: etcd-backup
     config.example.com/component: cronjob
   name: cronjob-etcd-backup
-  namespace: nekic-dev 
+  namespace: etcd-backup 
 spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 5
