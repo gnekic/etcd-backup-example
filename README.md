@@ -15,3 +15,6 @@ oc apply -Rf . --prune -l config.example.com/name=etcd-backup
 ```
 oc delete -Rf . -l config.example.com/name=etcd-backup
 ```
+
+## Support
+This is a workin in progress and not a supported solution.
