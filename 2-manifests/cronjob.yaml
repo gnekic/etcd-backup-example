@@ -16,7 +16,7 @@ spec:
       template:
         spec:
           activeDeadlineSeconds: 200
-          containers:
+          initContainers:
           - command:
             - /usr/local/bin/etcd-backup.sh
             image: quay.io/openshift/origin-etcd:4.3.0
@@ -47,6 +47,25 @@ spec:
             - mountPath: /usr/local/bin/etcd-snapshot-backup-disconnected.sh
               name: etcd-backup-scripts
               subPath: etcd-snapshot-backup-disconnected.sh
+          containers:
+          ##AWSCLI
+          - name: kubectl-aws
+            image: expert360/kubectl-awscli:v1.11.2
+            env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-s3-key
+                  key: aws-access-key-id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-s3-access-key
+                  key: aws-secret-access-key
+            command: [ "/bin/bash", "-c", "aws s3 sync s3://my-bucket/ /data/backup" ]
+            volumeMounts:
+            - name: etcd-backup
+              mountPath: /data/backup
           nodeSelector:
             node-role.kubernetes.io/master: ""
           dnsPolicy: ClusterFirst
